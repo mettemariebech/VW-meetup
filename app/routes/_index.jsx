@@ -12,11 +12,11 @@ export default function Index() {
   // const events = useLoaderData();
 
   return (
-    <div class="wrapper">
-      <div class="content">
-        <button class="btn">Sign in</button>
-        <button class="btn">Sign up</button>
-        <Link to="/events" class="link">
+    <div className="wrapper">
+      <div className="content">
+        <button className="btn">Sign in</button>
+        <button className="btn">Sign up</button>
+        <Link to="/events" className="link">
           Browse events..
         </Link>
       </div>
