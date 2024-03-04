@@ -1,6 +1,12 @@
 import { authenticator } from "~/services/auth.server";
 import { Form } from "@remix-run/react";
 
+export async function loader({ request }) {
+  return await authenticator.isAuthenticated(request, {
+    failureRedirect: "/signin",
+  });
+}
+
 export default function Profile() {
   // const user = useLoaderData();
   return (
