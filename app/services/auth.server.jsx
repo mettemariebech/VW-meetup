@@ -15,7 +15,7 @@ authenticator.use(
     let user = null;
 
     // login the user, this could be whatever process you want
-    if (mail === "race@eaaa.dk" && password === "test01") {
+    if (mail === "test@mm.dk" && password === "test123") {
       user = {
         mail,
       };
