@@ -1,7 +1,31 @@
 import { Form } from "@remix-run/react";
 import { authenticator } from "~/services/auth.server";
+import { sessionStorage } from "../services/session.server";
+import { json, useLoaderData } from "@remix-run/react";
+
+// -------------------- Loader -------------------- //
+
+export async function loader({ request }) {
+  // If the user is already authenticated redirect to /posts directly
+  await authenticator.isAuthenticated(request, {
+    successRedirect: "/profile",
+  });
+
+  // Retrieve error message from session if present
+  const session = await sessionStorage.getSession(
+    request.headers.get("Cookie"),
+  );
+  // Get the error message from the session
+  const error = session.get("sessionErrorKey");
+  return json({ error }); // return the error message
+}
+
+// -------------------- UI -------------------- //
 
 export default function SignIn() {
+  const loaderData = useLoaderData();
+  console.log("loaderData", loaderData);
+
   return (
     <div id="sign-in-page" className="wrapper">
       <h1>Sign In</h1>
@@ -25,6 +49,9 @@ export default function SignIn() {
           placeholder="Type your password..."
           autoComplete="current-password"
         />
+        <div className="error-message">
+          {loaderData?.error ? <p>{loaderData?.error?.message}</p> : null}
+        </div>
         <div className="btns">
           <button>Sign In</button>
         </div>

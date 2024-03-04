@@ -3,9 +3,9 @@ import { Authenticator, AuthorizationError } from "remix-auth";
 import { sessionStorage } from "./session.server";
 import { FormStrategy } from "remix-auth-form";
 
-// Create an instance of the authenticator, pass a generic with what
-// strategies will return and will store in the session
-export let authenticator = new Authenticator(sessionStorage);
+export let authenticator = new Authenticator(sessionStorage, {
+  sessionErrorKey: "sessionErrorKey", // keep in sync
+});
 
 // Tell the Authenticator to use the form strategy
 authenticator.use(
@@ -14,7 +14,22 @@ authenticator.use(
     let password = form.get("password");
     let user = null;
 
-    // login the user, this could be whatever process you want
+    if (!mail || mail?.length === 0) {
+      throw new AuthorizationError("Bad Credentials: Email is required");
+    }
+    if (typeof mail !== "string") {
+      throw new AuthorizationError("Bad Credentials: Email must be a string");
+    }
+
+    if (!password || password?.length === 0) {
+      throw new AuthorizationError("Bad Credentials: Password is required");
+    }
+    if (typeof password !== "string") {
+      throw new AuthorizationError(
+        "Bad Credentials: Password must be a string",
+      );
+    }
+
     if (mail === "test@mm.dk" && password === "test123") {
       user = {
         mail,
@@ -26,6 +41,5 @@ authenticator.use(
       throw new AuthorizationError("Bad Credentials");
     }
   }),
-
   "user-pass",
 );
