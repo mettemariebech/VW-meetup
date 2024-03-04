@@ -8,16 +8,21 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import styles from "./tailwind.css";
+import maincss from "./main.css";
 
 export const links = () => [
   {
     rel: "stylesheet",
     href: styles,
   },
+  {
+    rel: "stylesheet",
+    href: maincss,
+  },
 ];
 
 export function meta() {
-  return [{ title: "Work Journal" }];
+  return [{ title: "Silvestre" }];
 }
 
 export default function App() {
