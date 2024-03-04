@@ -33,10 +33,6 @@ const eventSchema = new Schema({
     type: String,
     required: true
   },
-  time: {
-    type: String,
-    required: true
-  },
   date: {
     type: Date,
     required: true
@@ -64,12 +60,12 @@ const eventSchema = new Schema({
 // in the database (which will be created automatically).
 export const models = [
   {
-    name: "user",
+    name: "User",
     schema: userSchema,
     collection: "user",
   },
   {
-    name: "events",
+    name: "Events",
     schema: eventSchema,
     collection: "events",
   }
