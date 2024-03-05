@@ -34,6 +34,9 @@ export default function Event() {
   return (
     <div id="post-page" className="page">
       <h1>{event.titel}</h1>
+      <p>{event.description}</p>
+      <div>{event.place}</div>
+      <div>{event.date}</div>
       <div className="btns">
         {user && event?.userID == user?._id && (
           <Form action="update">
