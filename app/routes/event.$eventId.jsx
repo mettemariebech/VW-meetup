@@ -35,9 +35,12 @@ export default function Event() {
   return (
     <div id="post-page" className="page">
       <h1>{event.titel}</h1>
-      <p>{event.description}</p>
-      <div>{event.place}</div>
-      <div>{format(new Date(event.date), "dd/MM/yyyy HH:mm")}</div>
+      <p>
+        Beskrivelse:
+        {event.description}
+      </p>
+      <div>Lokation: {event.place}</div>
+      <div>Tidspunkt: {format(new Date(event.date), "dd/MM/yyyy HH:mm")}</div>
       <div className="btns">
         {user && event?.userID == user?._id && (
           <>
