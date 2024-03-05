@@ -1,7 +1,7 @@
 import { authenticator } from "~/services/auth.server";
 import mongoose from "mongoose";
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData, Link } from "@remix-run/react";
 
 export async function loader({ request }) {
   await authenticator.isAuthenticated(request, {
@@ -21,8 +21,14 @@ export default function Events() {
       <ul className="events-list">
         {events.map((event) => (
           <li key={event._id} className="event-item">
-            <h2 className="event-title">{event.titel}</h2>
-            <p className="event-description">{event.description}</p>
+            <Link
+              key={event._id}
+              className="event-link"
+              to={`/event/${event._id}`}
+            >
+              <h2 className="event-title">{event.titel}</h2>
+              <p className="event-description">{event.description}</p>
+            </Link>
           </li>
         ))}
       </ul>
