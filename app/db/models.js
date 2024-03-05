@@ -24,6 +24,20 @@ const userSchema = new Schema(
   // https://mongoosejs.com/docs/timestamps.html
   { timestamps: true },
 );
+// ---------------------------------- Password hook ----------------------------------
+// pre save password hook
+userSchema.pre("save", async function (next) {
+  const user = this; // this refers to the user document
+
+  // only hash the password if it has been modified (or is new)
+  if (!user.isModified("password")) {
+    return next(); // continue
+  }
+
+  const salt = await bcrypt.genSalt(10); // generate a salt
+  user.password = await bcrypt.hash(user.password, salt); // hash the password
+  next(); // continue
+});
 
 // ---------------------------------- Event ----------------------------------
 const eventSchema = new Schema({
