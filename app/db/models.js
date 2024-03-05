@@ -1,4 +1,5 @@
 import { mongoose } from "mongoose";
+import bcrypt from "bcrypt";
 const { Schema } = mongoose;
 
 // ---------------------------------- User ----------------------------------
@@ -15,7 +16,8 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      required: true
+      required: true,
+      select: false
     },
   },
   // Automatically add `createdAt` and `updatedAt` timestamps:
