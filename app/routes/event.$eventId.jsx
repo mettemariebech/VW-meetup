@@ -3,6 +3,7 @@ import { Form, useLoaderData } from "@remix-run/react";
 // import PostCard from "../components/PostCard";
 import mongoose from "mongoose";
 import { authenticator } from "../services/auth.server";
+import { format } from "date-fns";
 
 export function meta({ data }) {
   return [
@@ -36,16 +37,18 @@ export default function Event() {
       <h1>{event.titel}</h1>
       <p>{event.description}</p>
       <div>{event.place}</div>
-      <div>{event.date}</div>
+      <div>{format(new Date(event.date), "dd/MM/yyyy HH:mm")}</div>
       <div className="btns">
         {user && event?.userID == user?._id && (
-          <Form action="update">
-            <button>Update</button>
-          </Form>
+          <>
+            <Form action="update">
+              <button>Update</button>
+            </Form>
+            <Form action="destroy" method="post" onSubmit={confirmDelete}>
+              <button>Delete</button>
+            </Form>
+          </>
         )}
-        <Form action="destroy" method="post" onSubmit={confirmDelete}>
-          <button>Delete</button>
-        </Form>
       </div>
     </div>
   );
