@@ -3,6 +3,7 @@ import { Form } from "@remix-run/react";
 import mongoose from "mongoose";
 import { json } from "@remix-run/react";
 import { useLoaderData } from "@remix-run/react";
+import { Link } from "@remix-run/react";
 
 export async function loader({ request }) {
   const user = await authenticator.isAuthenticated(request, {
@@ -30,18 +31,30 @@ export default function Profile() {
       <h2>Dine events</h2>
       <ul className="events-list">
         {events.map((event) => (
-          <li key={event._id} className="event-item">
-            <h3 className="event-title">{event.titel}</h3>
-          </li>
+          <Link
+            key={event._id}
+            className="event-link"
+            to={`/event/${event._id}`}
+          >
+            <li key={event._id} className="event-item">
+              <h3 className="event-title">{event.titel}</h3>
+            </li>
+          </Link>
         ))}
       </ul>
 
       <h2>Tilmeldte events</h2>
       <ul className="events-list">
         {myEvents.map((event) => (
-          <li key={event._id} className="event-item">
-            <h3 className="event-title">{event.titel}</h3>
-          </li>
+          <Link
+            key={event._id}
+            className="event-link"
+            to={`/event/${event._id}`}
+          >
+            <li key={event._id} className="event-item">
+              <h3 className="event-title">{event.titel}</h3>
+            </li>
+          </Link>
         ))}
       </ul>
       <Form id="profile-form" method="post">
