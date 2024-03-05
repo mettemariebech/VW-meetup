@@ -34,7 +34,7 @@ export default function SignIn() {
         <input
           id="mail"
           type="email"
-          name="mail"
+          name="email"
           aria-label="mail"
           placeholder="Type your mail..."
           required
