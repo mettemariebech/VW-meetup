@@ -4,10 +4,6 @@ import { json } from "@remix-run/node";
 import { useLoaderData, Link } from "@remix-run/react";
 
 export async function loader({ request }) {
-  await authenticator.isAuthenticated(request, {
-    failureRedirect: "/",
-  });
-
   const events = await mongoose.models.Events.find().exec();
   return json({ events });
 }
