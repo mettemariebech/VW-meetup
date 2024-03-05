@@ -14,8 +14,12 @@ export default function Index() {
   return (
     <div className="wrapper">
       <div className="content">
-        <button className="btn">Sign in</button>
-        <button className="btn">Sign up</button>
+        <Link to="/signin" className="btn">
+          Sign in
+        </Link>
+        <Link to="/signup" className="btn">
+          Sign up
+        </Link>
         <Link to="/events" className="link">
           Browse events..
         </Link>

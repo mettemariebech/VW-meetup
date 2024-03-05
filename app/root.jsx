@@ -9,6 +9,9 @@ import {
 } from "@remix-run/react";
 import styles from "./tailwind.css";
 import maincss from "./main.css";
+import Nav from "./components/Nav";
+import { useLoaderData } from "@remix-run/react";
+import { authenticator } from "./services/auth.server";
 
 export const links = () => [
   {
@@ -25,7 +28,12 @@ export function meta() {
   return [{ title: "Silvestre" }];
 }
 
+export async function loader({ request }) {
+  return await authenticator.isAuthenticated(request);
+}
+
 export default function App() {
+  const user = useLoaderData();
   return (
     <html lang="en">
       <head>
@@ -35,6 +43,7 @@ export default function App() {
         <Links />
       </head>
       <body>
+        {user ? <Nav /> : null}
         <Outlet />
         <ScrollRestoration />
         <Scripts />

@@ -1,3 +1,18 @@
+/* ---------- Root Variables ---------- */
+:root {
+  /* --green: rgb(38, 76, 89);
+  --dark-green: rgb(9, 47, 59); */
+  --light-grey: #18181b;
+  --grey: #52525b;
+  --text-color-danger: rgb(152, 58, 58);
+  --text-color-dark: #333;
+  --text-color-light: #f1f1f1;
+  --text-color-danger: #f44250;
+  --white: #f1f1f1;
+}
+
+/* ---------- HTML, body and rest styling ---------- */
+
 body,
 html {
   height: 100%;
@@ -5,8 +20,15 @@ html {
   padding: 0;
 }
 
+body {
+  background-color: #ffffff;
+  color: #000000;
+  font-family: Arial, sans-serif;
+}
+
 .wrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
@@ -19,6 +41,13 @@ html {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  max-width: 400px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 3.2em;
+  font-weight: bold;
 }
 
 .btn {
@@ -28,6 +57,8 @@ html {
   font-weight: bold;
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
+  cursor: pointer;
+  text-align: center;
 }
 
 .btn:hover {
@@ -41,4 +72,89 @@ html {
 
 .link:hover {
   text-decoration: underline;
+}
+
+/* ---------- Navigation Styling ---------- */
+nav {
+  background-color: black;
+  display: grid;
+  left: 0;
+  /* position: fixed; */
+  right: 0;
+  text-align: center;
+  top: 0;
+  padding: 1em 2em;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+}
+
+/* Style the links inside the navigation bar */
+nav a {
+  display: inline-block;
+  color: var(--text-color-light);
+  text-align: center;
+  padding: 20px 16px;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 1.2em;
+  border-radius: 8px;
+  transition: 0.5s;
+}
+
+/* Change the color of links on hover */
+nav a:hover {
+  background-color: white;
+  color: var(--green);
+}
+
+/* Add a color to the active/current link */
+nav a.active {
+  background-color: pink;
+  color: var(--green);
+}
+
+/* ================== Form ================== */
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+
+label {
+  margin-top: 10px;
+}
+
+input {
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #000000;
+  border-radius: 3px;
+  background-color: transparent;
+  color: #000000;
+}
+
+.error-message {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.btns {
+  margin-top: 20px;
+  text-align: center;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.error-message {
+  color: red;
 }
