@@ -68,7 +68,7 @@ export default function UpdateEvent() {
           name="date"
           type="datetime-local"
           aria-label="location"
-          value={
+          defaultValue={
             event?.date
               ? format(new Date(event.date), "yyyy-MM-dd'T'HH:mm")
               : format(new Date(), "yyyy-MM-dd'T'HH:mm")
