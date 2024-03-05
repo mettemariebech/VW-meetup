@@ -13,16 +13,16 @@ export function meta({ data }) {
 }
 
 export async function loader({ params, request }) {
-  await authenticator.isAuthenticated(request, {
+  const user = await authenticator.isAuthenticated(request, {
     failureRedirect: "/signin",
   });
 
   const event = await mongoose.models.Events.findById(params.eventId);
-  return json({ event });
+  return json({ event, user });
 }
 
 export default function Event() {
-  const { event } = useLoaderData();
+  const { event, user } = useLoaderData();
 
   function confirmDelete(event) {
     const response = confirm("Please confirm you want to delete this post.");
@@ -35,9 +35,11 @@ export default function Event() {
     <div id="post-page" className="page">
       <h1>{event.titel}</h1>
       <div className="btns">
-        <Form action="update">
-          <button>Update</button>
-        </Form>
+        {user && event?.userID == user?._id && (
+          <Form action="update">
+            <button>Update</button>
+          </Form>
+        )}
         <Form action="destroy" method="post" onSubmit={confirmDelete}>
           <button>Delete</button>
         </Form>
