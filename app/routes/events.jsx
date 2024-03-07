@@ -1,31 +1,42 @@
 import { authenticator } from "~/services/auth.server";
 import mongoose from "mongoose";
 import { json } from "@remix-run/node";
-import { useLoaderData, Link } from "@remix-run/react";
+import { useLoaderData, Link, useActionData } from "@remix-run/react";
+import { Form } from "@remix-run/react";
+import { useState } from "react";
 
 export async function loader({ request }) {
   const events = await mongoose.models.Events.find().exec();
   return json({ events });
 }
 
+function handleSubmit(event) {}
+
 export default function Events() {
-  const { events } = useLoaderData();
+  let { events } = useLoaderData();
+  const searchedEvents = useActionData();
+  const [search, setSearch] = useState(events);
+  if (searchedEvents && search == events) {
+    setSearch(searchedEvents);
+  }
 
   return (
     <div className="events-container">
-      <form id="search-form" action="/search" method="GET">
-        <label for="search">Søg efter events:</label>
+      <Form id="search-form" method="post" onSubmit={handleSubmit}>
+        <input type="search" name="search" placeholder="Search" />
         <input
-          type="text"
-          id="search"
-          name="q"
-          placeholder="Indtast søgeord"
-        ></input>
-        <button type="button">Søg</button>
-      </form>
+          className="px-3 text-slate-700 mx-2 rounded-md"
+          type="datetime-local"
+          name="date"
+        />
+        <button name="_action" value="search" type="submit">
+          Search
+        </button>
+      </Form>
+
       <h1>Events</h1>
       <ul className="events-list">
-        {events.map((event) => (
+        {search.map((event) => (
           <li key={event._id} className="event-item">
             <Link
               key={event._id}
@@ -40,4 +51,21 @@ export default function Events() {
       </ul>
     </div>
   );
+}
+
+export async function action({ request }) {
+  const formData = await request.formData();
+  const { _action, search, date } = Object.fromEntries(formData);
+  if (_action === "search") {
+    const q = search;
+    const searchedEvents = await mongoose.models.Events.find({
+      $or: [
+        { titel: { $regex: new RegExp(q), $options: "i" } },
+        { description: { $regex: new RegExp(q), $options: "i" } },
+        { place: { $regex: new RegExp(q), $options: "i" } },
+        { date: { $gte: date } },
+      ],
+    });
+    return json(searchedEvents);
+  }
 }
