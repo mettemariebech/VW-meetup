@@ -20,14 +20,17 @@ export async function loader({ request }) {
   });
 
   const events = await mongoose.models.Events.find({ userID: userId }).exec();
-  return json({ events, myEvents });
+
+  const username = await mongoose.models.User.findOne({ _id: userId });
+  console.log(username);
+  return json({ events, myEvents, username });
 }
 
 export default function Profile() {
-  const { events, myEvents } = useLoaderData();
+  const { events, myEvents, username } = useLoaderData();
   return (
     <div id="profile-page" className="page">
-      <h1>Profile</h1>
+      <h1>{username.username}</h1>
       <h2>Dine events</h2>
       <ul className="events-list">
         {events.map((event) => (
