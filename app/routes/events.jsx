@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import { json } from "@remix-run/node";
 import { useLoaderData, Link, useActionData } from "@remix-run/react";
 import { Form } from "@remix-run/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export async function loader({ request }) {
   const events = await mongoose.models.Events.find().exec();
@@ -16,14 +16,23 @@ export default function Events() {
   let { events } = useLoaderData();
   const searchedEvents = useActionData();
   const [search, setSearch] = useState(events);
-  if (searchedEvents && search == events) {
-    setSearch(searchedEvents);
-  }
+  const [searchBar, setSearchBar] = useState();
+
+  useEffect(() => {
+    if (searchedEvents && searchedEvents !== events) {
+      setSearch(searchedEvents);
+    }
+  }, [searchedEvents, events]);
 
   return (
     <div className="events-container">
       <Form id="search-form" method="post" onSubmit={handleSubmit}>
-        <input type="search" name="search" placeholder="Search" />
+        <input
+          type="search"
+          name="search"
+          placeholder="Search"
+          value={searchBar}
+        />
         <input
           className="px-3 text-slate-700 mx-2 rounded-md"
           type="datetime-local"
