@@ -13,6 +13,16 @@ export default function Events() {
 
   return (
     <div className="events-container">
+      <form id="search-form" action="/search" method="GET">
+        <label for="search">Søg efter events:</label>
+        <input
+          type="text"
+          id="search"
+          name="q"
+          placeholder="Indtast søgeord"
+        ></input>
+        <button type="button">Søg</button>
+      </form>
       <h1>Events</h1>
       <ul className="events-list">
         {events.map((event) => (
