@@ -14,7 +14,7 @@ authenticator.use(
   new FormStrategy(async ({ form }) => {
     let email = form.get("email");
     let password = form.get("password");
-    console.log(email);
+
     if (!email || email?.length === 0) {
       throw new AuthorizationError("Bad Credentials: Email is required");
     }
