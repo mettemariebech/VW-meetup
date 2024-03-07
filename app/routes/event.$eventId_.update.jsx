@@ -1,5 +1,6 @@
 import { json, redirect } from "@remix-run/node";
 import { Form, useLoaderData, useNavigate } from "@remix-run/react";
+import { useState } from "react";
 import mongoose from "mongoose";
 import { authenticator } from "../services/auth.server";
 import { format } from "date-fns";
@@ -17,19 +18,10 @@ export async function loader({ params, request }) {
     failureRedirect: "/signin",
   });
 
-  const events = await mongoose.models.Events.findOne({
-    where: { id: params.eventId },
-  });
-  if (!events || events.userId !== user.id) {
-    // Event not found or user is not the owner
-    throw new Response("fail", { status: 404 });
-  }
-
   const event = await mongoose.models.Events.findById(params.eventId);
   //   .populate(
   //     "User",
   //   );
-
   return json({ event });
 }
 
