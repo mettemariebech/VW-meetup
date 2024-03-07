@@ -14,9 +14,16 @@ export function meta() {
 }
 
 export async function loader({ params, request }) {
-  await authenticator.isAuthenticated(request, {
+  const user = await authenticator.isAuthenticated(request, {
     failureRedirect: "/signin",
   });
+
+  // const events = await mongoose.models.Events.findById(params.eventId);
+  // console.log(events, user);
+  // if (!events || events.userID !== user._id) {
+  //   // Event not found or user is not the owner
+  //   throw new Response("fail", { status: 404 });
+  // }
 
   const event = await mongoose.models.Events.findById(params.eventId);
   //   .populate(
