@@ -26,7 +26,7 @@ export default function AddPost() {
   return (
     <div className="page">
       <h1>Add an event</h1>
-      <Form id="event-form" method="post">
+      <Form className="event-form" method="post">
         <label htmlFor="overskrift">Overskrift</label>
         <input
           id="overskrift"

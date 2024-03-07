@@ -135,7 +135,7 @@ nav a.active {
 
 /* ================== Form ================== */
 
-form {
+.event-form {
   display: flex;
   flex-direction: column;
   width: 500px;
@@ -212,4 +212,11 @@ button {
 
 h2 {
   font-size: 1.5rem;
+}
+
+/* ================== Search ================== */
+
+#seach-form {
+  display: flex;
+  flex-direction: row;
 }
