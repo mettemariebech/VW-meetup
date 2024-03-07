@@ -14,7 +14,9 @@ export function meta({ data }) {
 }
 
 export async function loader({ params, request }) {
-  const user = await authenticator.isAuthenticated(request);
+  const user = await authenticator.isAuthenticated(request, {
+    failureRedirect: "/signin",
+  });
 
   const event = await mongoose.models.Events.findById(params.eventId);
   return json({ event, user });
