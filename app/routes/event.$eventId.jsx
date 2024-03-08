@@ -12,7 +12,7 @@ export function meta({ data }) {
     },
   ];
 }
-
+// ------------------------------------Loader----------------------------------------
 export async function loader({ params, request }) {
   const user = await authenticator.isAuthenticated(request);
 
@@ -23,7 +23,7 @@ export async function loader({ params, request }) {
 
   return json({ event, user });
 }
-
+// ------------------------------------Event UI----------------------------------------
 export default function Event() {
   const { event, user } = useLoaderData();
   const fetcher = useFetcher();
