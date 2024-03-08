@@ -4,6 +4,7 @@ import { Form, useLoaderData, useFetcher } from "@remix-run/react";
 import mongoose from "mongoose";
 import { authenticator } from "../services/auth.server";
 import { format } from "date-fns";
+import { redirect } from "@remix-run/node";
 
 export function meta({ data }) {
   return [
@@ -36,17 +37,9 @@ export default function Event() {
   }
 
   async function handleAttend(event) {
-    event.preventDefault();
-
     // Prepare the data to be sent
     const formData = new FormData();
     formData.append("_action", "attend");
-
-    // Use fetcher to submit the form data
-    fetcher.submit(formData, {
-      method: "post",
-      action: `/event/${event._id}`, // Your route that handles the post request
-    });
   }
 
   async function handleUnattend(event) {
@@ -96,8 +89,12 @@ export default function Event() {
               action={`/event/${event._id}`}
               onSubmit={handleAttend}
             >
-              <input type="hidden" name="_action" value="attend" />
-              <button type="submit" className="bg-black float-left">
+              <button
+                type="submit"
+                name="_action"
+                value="attend"
+                className="bg-black float-left"
+              >
                 Tilmeld
               </button>
             </Form>
@@ -108,13 +105,13 @@ export default function Event() {
       <div className="btns">
         {!isUserHost && isAlreadyAttending && (
           <>
-            <Form
-              method="post"
-              action={`/event/${event._id}`}
-              onSubmit={handleUnattend}
-            >
-              <input type="hidden" name="_action" value="unattend" />
-              <button type="submit" className="bg-black float-left">
+            <Form method="post">
+              <button
+                type="submit"
+                name="_action"
+                value="unattend"
+                className="bg-black float-left"
+              >
                 Frameld
               </button>
             </Form>
@@ -151,9 +148,14 @@ export const action = async ({ request, params }) => {
       // Handle the case where the user is not authenticated
       return redirect("/signin");
     }
-
-    const eventId = params.eventId;
-    const event = await mongoose.models.Events.findById(eventId);
+    const userId = user._id;
+    const eventId = new mongoose.Types.ObjectId(params.eventId);
+    console.log(eventId);
+    const event = await mongoose.models.Events.findOneAndUpdate(eventId, {
+      $push: {
+        attendees: userId,
+      },
+    });
 
     if (!event) {
       // Handle the case where the event is not found
@@ -180,11 +182,17 @@ export const action = async ({ request, params }) => {
       return redirect("/signin");
     }
 
-    const eventId = params.eventId;
-    const event = await mongoose.models.Events.findById(eventId);
+    const userId = user._id;
+    const eventId = new mongoose.Types.ObjectId(params.eventId);
+    console.log(eventId);
+    const event = await mongoose.models.Events.findOneAndUpdate(eventId, {
+      $pull: {
+        attendees: userId,
+      },
+    });
 
     if (!event) {
-      // Handle the case where the jam is not found
+      // Handle the case where the event is not found
       return null;
     }
 
