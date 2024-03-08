@@ -24,7 +24,6 @@ export async function loader({ params, request }) {
   return json({ event, user });
 }
 
-
 export default function Event() {
   const { event, user } = useLoaderData();
 
@@ -35,6 +34,13 @@ export default function Event() {
     }
   }
 
+  const isUserHost =
+    user && event.userID && event.userID.toString() === user._id.toString();
+
+  const isAlreadyAttending =
+    user && event.attendees.some((attendee) => attendee._id === user._id);
+
+  console.log({ isUserHost, isAlreadyAttending });
   return (
     <div id="post-page" className="page">
       <h1>{event.titel}</h1>
@@ -53,7 +59,20 @@ export default function Event() {
           ))}
         </ul>
       </div>
-
+      {/* -------------------tilmeld-----------------------*/}
+      <div className="btns">
+        {user && !isUserHost && !isAlreadyAttending && (
+          <>
+            <Form method="post" action="update">
+              <input type="hidden" name="_action" value="attend" />
+              <button type="submit" className="bg-black float-left">
+                Tilmeld dig eventet
+              </button>
+            </Form>
+          </>
+        )}
+      </div>
+      {/* -------------------Update & delete-----------------------*/}
       <div className="btns">
         {user && event?.userID == user?._id && (
           <>

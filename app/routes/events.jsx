@@ -38,11 +38,15 @@ export default function Events() {
           type="datetime-local"
           name="date"
         />
-        <button name="_action" value="search" type="submit">
+        <button
+          name="_action"
+          value="search"
+          type="submit"
+          className="bg-black"
+        >
           Search
         </button>
       </Form>
-
       <h1>Events</h1>
       <ul className="events-list">
         {search.map((event) => (
