@@ -16,9 +16,14 @@ export function meta({ data }) {
 export async function loader({ params, request }) {
   const user = await authenticator.isAuthenticated(request);
 
-  const event = await mongoose.models.Events.findById(params.eventId);
+  const event = await mongoose.models.Events.findById(params.eventId).populate(
+    "attendees",
+    "username",
+  );
+
   return json({ event, user });
 }
+
 
 export default function Event() {
   const { event, user } = useLoaderData();
@@ -39,6 +44,16 @@ export default function Event() {
       </p>
       <div>Lokation: {event.place}</div>
       <div>Tidspunkt: {format(new Date(event.date), "dd/MM/yyyy HH:mm")}</div>
+
+      <div>
+        Attendees:
+        <ul>
+          {event.attendees.map((attendee, index) => (
+            <li key={index}>{attendee.username}</li>
+          ))}
+        </ul>
+      </div>
+
       <div className="btns">
         {user && event?.userID == user?._id && (
           <>

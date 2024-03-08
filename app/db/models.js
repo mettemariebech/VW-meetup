@@ -59,12 +59,12 @@ const eventSchema = new Schema({
   },
   userID: {
     type: Schema.Types.ObjectId,
-    ref: 'user',
+    ref: 'User',
     required: true
   },
   attendees: [{
     type: Schema.Types.ObjectId,
-    ref: 'user'
+    ref: 'User'
   }]
 },
   { timestamps: true },

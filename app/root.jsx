@@ -15,6 +15,7 @@ import Nav from "./components/Nav";
 import { useLoaderData } from "@remix-run/react";
 import { authenticator } from "./services/auth.server";
 
+
 export const links = () => [
   {
     rel: "stylesheet",
@@ -67,7 +68,7 @@ export function ErrorBoundary() {
         <Links />
       </head>
       <body className="flex h-full flex-col items-center justify-center">
-        <p className="text-3xl">Hovsa!</p>
+        <p className="text-3xl">Hov hov!</p>
 
         {isRouteErrorResponse(error) ? (
           <p>
