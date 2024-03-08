@@ -1,5 +1,5 @@
 import { json } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
+import { Form, useLoaderData, useFetcher } from "@remix-run/react";
 // import PostCard from "../components/PostCard";
 import mongoose from "mongoose";
 import { authenticator } from "../services/auth.server";
@@ -26,6 +26,7 @@ export async function loader({ params, request }) {
 
 export default function Event() {
   const { event, user } = useLoaderData();
+  const fetcher = useFetcher();
 
   function confirmDelete(event) {
     const response = confirm("Please confirm you want to delete this post.");
@@ -34,13 +35,40 @@ export default function Event() {
     }
   }
 
+  async function handleAttend(event) {
+    event.preventDefault();
+
+    // Prepare the data to be sent
+    const formData = new FormData();
+    formData.append("_action", "attend");
+
+    // Use fetcher to submit the form data
+    fetcher.submit(formData, {
+      method: "post",
+      action: `/event/${event._id}`, // Your route that handles the post request
+    });
+  }
+
+  async function handleUnattend(event) {
+    event.preventDefault();
+
+    // Prepare the data to be sent
+    const formData = new FormData();
+    formData.append("_action", "unattend");
+
+    // Use fetcher to submit the form data
+    fetcher.submit(formData, {
+      method: "post",
+      action: `/event/${event._id}`, // Your route that handles the post request
+    });
+  }
+
   const isUserHost =
     user && event.userID && event.userID.toString() === user._id.toString();
 
   const isAlreadyAttending =
     user && event.attendees.some((attendee) => attendee._id === user._id);
 
-  console.log({ isUserHost, isAlreadyAttending });
   return (
     <div id="post-page" className="page">
       <h1>{event.titel}</h1>
@@ -63,10 +91,31 @@ export default function Event() {
       <div className="btns">
         {user && !isUserHost && !isAlreadyAttending && (
           <>
-            <Form method="post" action="update">
+            <Form
+              method="post"
+              action={`/event/${event._id}`}
+              onSubmit={handleAttend}
+            >
               <input type="hidden" name="_action" value="attend" />
               <button type="submit" className="bg-black float-left">
-                Tilmeld dig eventet
+                Tilmeld
+              </button>
+            </Form>
+          </>
+        )}
+      </div>
+      {/* -------------------Frameld-----------------------*/}
+      <div className="btns">
+        {!isUserHost && isAlreadyAttending && (
+          <>
+            <Form
+              method="post"
+              action={`/event/${event._id}`}
+              onSubmit={handleUnattend}
+            >
+              <input type="hidden" name="_action" value="unattend" />
+              <button type="submit" className="bg-black float-left">
+                Frameld
               </button>
             </Form>
           </>
@@ -88,3 +137,63 @@ export default function Event() {
     </div>
   );
 }
+
+{
+  /* -------------------Action-----------------------*/
+}
+export const action = async ({ request, params }) => {
+  const formData = await request.formData();
+  const actionType = formData.get("_action");
+
+  if (actionType === "attend") {
+    const user = await authenticator.isAuthenticated(request);
+    if (!user) {
+      // Handle the case where the user is not authenticated
+      return redirect("/signin");
+    }
+
+    const eventId = params.eventId;
+    const event = await mongoose.models.Events.findById(eventId);
+
+    if (!event) {
+      // Handle the case where the event is not found
+      return null;
+    }
+
+    // Check if the user is already an attendee
+    if (event.attendees.includes(user._id)) {
+      // Maybe you want to send a message back to the user that they're already attending
+      return null;
+    }
+
+    // Add user to attendees
+    event.attendees.push(user._id);
+    await event.save();
+
+    return redirect(`/profile`);
+  }
+
+  if (actionType === "unattend") {
+    const user = await authenticator.isAuthenticated(request);
+    if (!user) {
+      // Handle the case where the user is not authenticated
+      return redirect("/signin");
+    }
+
+    const eventId = params.eventId;
+    const event = await mongoose.models.Events.findById(eventId);
+
+    if (!event) {
+      // Handle the case where the jam is not found
+      return null;
+    }
+
+    // Remove the user from attendees
+    event.attendees = event.attendees.filter(
+      (attendeeId) => attendeeId.toString() !== user._id.toString(),
+    );
+    await event.save();
+
+    return redirect(`/profile`);
+  }
+};
