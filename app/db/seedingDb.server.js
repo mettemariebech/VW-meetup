@@ -19,44 +19,44 @@ async function insertData() {
   await Events.collection.drop();
 
   console.log("Inserting data...");
-  
-  
+
+
   // Insert users
   const user1 = await User.create({
-    username: 'Anna Finsrud',
-    email: 'anna@kolle.com',
+    username: 'Janis Joplin',
+    email: 'janis@mail.com',
     password: 'test123'
   });
 
   const user2 = await User.create({
-    username: 'Freja Lund Rasmussen',
-    email: 'freja@kolle.com',
+    username: 'Jim Morrison',
+    email: 'jim@mail.com',
     password: 'test123'
   });
 
   const user3 = await User.create({
-    username: 'Mette-Marie Bech Sørensen',
-    email: 'MM@kolle.com',
+    username: 'Jimi Hendrix,',
+    email: 'jimi@mail.com',
     password: 'test123'
   });
 
   // Opret et event
   await Events.insertMany([
     {
-      titel: 'Børnefødselsdag',
-      description: 'Min 28-års fødselsdag fest',
-      time: '18:00',
+      titel: 'The Annual VW Vintage Meetup',
+      description: 'Join us for our annual gathering of classic VW cars! Whether you own a vintage Beetle, an iconic VW T2, or a rare Karmann Ghia, this is the place to be. We´ll have plenty of beautiful vehicles to admire, as well as the opportunity to meet other enthusiasts and share stories about our beloved VWs.',
+      time: '10:00',
       date: new Date('2024-03-16'),
-      place: 'Min adresse',
+      place: 'Siimtoften 3, 8680 Ry',
       userID: user3._id, // Brug ID'et fra en eksisterende bruger
       attendees: [user1._id, user2._id, user3._id] // Tilføj ID'er for deltagere
     },
     {
-      titel: 'Sorring-tur',
-      description: 'Vi skal nusse lam',
+      titel: 'Classic Cars Cruise and Dinner',
+      description: 'Join us for a scenic drive in our classic cars followed by a delicious dinner! Experience the thrill of cruising through picturesque landscapes in your vintage vehicle, followed by a relaxing evening of good food and great company.',
       time: '10:00',
       date: new Date('2024-04-27'),
-      place: 'Sorring',
+      place: 'Bysmedevej 61, 8381 Tilst',
       userID: user1._id, // Brug ID'et fra en eksisterende bruger
       attendees: [user1._id, user2._id, user3._id] // Tilføj ID'er for deltagere
     }

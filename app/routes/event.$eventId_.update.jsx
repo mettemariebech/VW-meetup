@@ -21,14 +21,11 @@ export async function loader({ params, request }) {
   const events = await mongoose.models.Events.findById(params.eventId);
   console.log(events, user);
   if (!events || events.userID.toString() !== user._id.toString()) {
-    // Event not found or user is not the owner
+
     throw new Response("fail", { status: 404 });
   }
 
   const event = await mongoose.models.Events.findById(params.eventId);
-  //   .populate(
-  //     "User",
-  //   );
   return json({ event });
 }
 
@@ -42,18 +39,18 @@ export default function UpdateEvent() {
 
   return (
     <div className="page">
-      <h1>Add an event</h1>
+      <h1>Update Meetup</h1>
       <Form className="event-form" method="post">
-        <label htmlFor="overskrift">Overskrift</label>
+        <label htmlFor="title">Title</label>
         <input
-          id="overskrift"
+          id="Title"
           name="titel"
           type="text"
-          aria-label="overskrift"
+          aria-label="title"
           defaultValue={event?.titel}
         />
 
-        <label htmlFor="beskrivelse">Beskrivelse</label>
+        <label htmlFor="description">Description</label>
         <textarea
           id="description"
           name="description"
@@ -61,7 +58,7 @@ export default function UpdateEvent() {
           defaultValue={event?.description}
         ></textarea>
 
-        <label htmlFor="location">Lokation</label>
+        <label htmlFor="location">location</label>
         <input
           id="location"
           name="place"
@@ -69,7 +66,7 @@ export default function UpdateEvent() {
           aria-label="location"
           defaultValue={event?.place}
         />
-        <label htmlFor="date">Dato</label>
+        <label htmlFor="date">Date</label>
         <input
           id="date"
           name="date"

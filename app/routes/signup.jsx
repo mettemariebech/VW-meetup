@@ -9,17 +9,16 @@ import mongoose from "mongoose";
 import { Link } from "@remix-run/react";
 
 export async function loader({ request }) {
-  // If the user is already authenticated redirect to /profile directly
   await authenticator.isAuthenticated(request, {
     successRedirect: "/profile",
   });
-  // Retrieve error message from session if present
+
   const session = await sessionStorage.getSession(
     request.headers.get("Cookie"),
   );
-  // Get the error message from the session
+
   const error = session.get("sessionErrorKey");
-  return json({ error }); // return the error message
+  return json({ error });
 }
 
 export default function SignUp() {
@@ -75,13 +74,13 @@ export default function SignUp() {
 }
 
 export async function action({ request }) {
-  const formData = await request.formData(); // get the form data
-  const newUser = Object.fromEntries(formData); // convert the form data to an object
-  const result = await mongoose.models.User.create(newUser); // create a new user
+  const formData = await request.formData();
+  const newUser = Object.fromEntries(formData);
+  const result = await mongoose.models.User.create(newUser);
 
   if (result) {
-    return redirect("/profile"); // redirect to /profile if successful
+    return redirect("/profile");
   } else {
-    return redirect("/signup"); // redirect to /signup if not successful
+    return redirect("/signup");
   }
 }

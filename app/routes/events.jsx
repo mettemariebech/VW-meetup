@@ -1,4 +1,3 @@
-import { authenticator } from "~/services/auth.server";
 import mongoose from "mongoose";
 import { json } from "@remix-run/node";
 import { useLoaderData, Link, useActionData } from "@remix-run/react";
@@ -43,7 +42,7 @@ export default function Events() {
           Search
         </button>
       </Form>
-      <h1>Events</h1>
+      <h1>Meetups</h1>
       <ul className="events-list">
         {search.map((event) => (
           <li key={event._id} className="event-item">

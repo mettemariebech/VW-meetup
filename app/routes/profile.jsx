@@ -31,7 +31,7 @@ export default function Profile() {
   return (
     <div id="profile-page" className="page">
       <h1>{username.username}</h1>
-      <h2>Dine events</h2>
+      <h2>Your meetups</h2>
       <ul className="events-list">
         {events.map((event) => (
           <Link
@@ -46,7 +46,7 @@ export default function Profile() {
         ))}
       </ul>
 
-      <h2>Tilmeldte events</h2>
+      <h2>Meetups you're attending</h2>
       <ul className="events-list">
         {myEvents.map((event) => (
           <Link
