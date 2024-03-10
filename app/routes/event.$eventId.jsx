@@ -86,8 +86,8 @@ export default function Event() {
           <>
             <Form
               method="post"
-              action={`/event/${event._id}`}
-              onSubmit={handleAttend}
+              // action={`/event/${event._id}`}
+              // onSubmit={handleAttend}
             >
               <button
                 type="submit"
@@ -142,6 +142,7 @@ export const action = async ({ request, params }) => {
   const formData = await request.formData();
   const actionType = formData.get("_action");
 
+  /* ------------tilføj attend--------------*/
   if (actionType === "attend") {
     const user = await authenticator.isAuthenticated(request);
     if (!user) {
@@ -168,13 +169,10 @@ export const action = async ({ request, params }) => {
       return null;
     }
 
-    // Add user to attendees
-    event.attendees.push(user._id);
-    await event.save();
-
     return redirect(`/profile`);
   }
 
+  /* ------------fjern attend--------------*/
   if (actionType === "unattend") {
     const user = await authenticator.isAuthenticated(request);
     if (!user) {
