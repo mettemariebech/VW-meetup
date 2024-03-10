@@ -1,4 +1,3 @@
-import React from "react";
 import { Form } from "@remix-run/react";
 import { authenticator } from "../services/auth.server";
 import { sessionStorage } from "../services/session.server";
@@ -7,25 +6,26 @@ import { useLoaderData } from "@remix-run/react";
 import { redirect } from "@remix-run/node";
 import mongoose from "mongoose";
 import { Link } from "@remix-run/react";
+import BackArrow from "~/components/BackArrow";
 
 export async function loader({ request }) {
-  // If the user is already authenticated redirect to /profile directly
   await authenticator.isAuthenticated(request, {
     successRedirect: "/profile",
   });
-  // Retrieve error message from session if present
+
   const session = await sessionStorage.getSession(
     request.headers.get("Cookie"),
   );
-  // Get the error message from the session
+
   const error = session.get("sessionErrorKey");
-  return json({ error }); // return the error message
+  return json({ error });
 }
 
 export default function SignUp() {
   const loaderData = useLoaderData();
   return (
     <div id="sign-up-page" className="wrapper">
+      <BackArrow />
       <h1>Sign Up</h1>
       <Form id="sign-up-form" method="post">
         <label htmlFor="mail">Mail:</label>
@@ -75,13 +75,13 @@ export default function SignUp() {
 }
 
 export async function action({ request }) {
-  const formData = await request.formData(); // get the form data
-  const newUser = Object.fromEntries(formData); // convert the form data to an object
-  const result = await mongoose.models.User.create(newUser); // create a new user
+  const formData = await request.formData();
+  const newUser = Object.fromEntries(formData);
+  const result = await mongoose.models.User.create(newUser);
 
   if (result) {
-    return redirect("/profile"); // redirect to /profile if successful
+    return redirect("/profile");
   } else {
-    return redirect("/signup"); // redirect to /signup if not successful
+    return redirect("/signup");
   }
 }

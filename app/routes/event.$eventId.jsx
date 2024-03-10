@@ -1,15 +1,15 @@
 import { json } from "@remix-run/node";
 import { Form, useLoaderData, useFetcher } from "@remix-run/react";
-// import PostCard from "../components/PostCard";
 import mongoose from "mongoose";
 import { authenticator } from "../services/auth.server";
 import { format } from "date-fns";
 import { redirect } from "@remix-run/node";
+import BackArrow from "~/components/BackArrow";
 
 export function meta({ data }) {
   return [
     {
-      title: `Silvestre - ${data.event.titel || "Event"}`,
+      title: `VWeetup - ${data.event.titel || "Meetup"}`,
     },
   ];
 }
@@ -30,7 +30,7 @@ export default function Event() {
   const fetcher = useFetcher();
 
   function confirmDelete(event) {
-    const response = confirm("Please confirm you want to delete this post.");
+    const response = confirm("Please confirm you want to delete this meetup.");
     if (!response) {
       event.preventDefault();
     }
@@ -45,14 +45,12 @@ export default function Event() {
   async function handleUnattend(event) {
     event.preventDefault();
 
-    // Prepare the data to be sent
     const formData = new FormData();
     formData.append("_action", "unattend");
 
-    // Use fetcher to submit the form data
     fetcher.submit(formData, {
       method: "post",
-      action: `/event/${event._id}`, // Your route that handles the post request
+      action: `/event/${event._id}`,
     });
   }
 
@@ -63,14 +61,15 @@ export default function Event() {
     user && event.attendees.some((attendee) => attendee._id === user._id);
 
   return (
-    <div id="post-page" className="page">
+    <div id="meetup-page" className="page">
+      <BackArrow />
       <h1>{event.titel}</h1>
       <p>
-        Beskrivelse:
+        Description:
         {event.description}
       </p>
-      <div>Lokation: {event.place}</div>
-      <div>Tidspunkt: {format(new Date(event.date), "dd/MM/yyyy HH:mm")}</div>
+      <div>Location: {event.place}</div>
+      <div>Time: {format(new Date(event.date), "dd/MM/yyyy HH:mm")}</div>
 
       <div>
         Attendees:
@@ -84,18 +83,14 @@ export default function Event() {
       <div className="btns">
         {user && !isUserHost && !isAlreadyAttending && (
           <>
-            <Form
-              method="post"
-              // action={`/event/${event._id}`}
-              // onSubmit={handleAttend}
-            >
+            <Form method="post">
               <button
                 type="submit"
                 name="_action"
                 value="attend"
                 className="bg-black float-left"
               >
-                Tilmeld
+                Attend
               </button>
             </Form>
           </>
@@ -112,7 +107,7 @@ export default function Event() {
                 value="unattend"
                 className="bg-black float-left"
               >
-                Frameld
+                Unattend
               </button>
             </Form>
           </>
@@ -146,7 +141,6 @@ export const action = async ({ request, params }) => {
   if (actionType === "attend") {
     const user = await authenticator.isAuthenticated(request);
     if (!user) {
-      // Handle the case where the user is not authenticated
       return redirect("/signin");
     }
     const userId = user._id;
@@ -159,13 +153,10 @@ export const action = async ({ request, params }) => {
     });
 
     if (!event) {
-      // Handle the case where the event is not found
       return null;
     }
 
-    // Check if the user is already an attendee
     if (event.attendees.includes(user._id)) {
-      // Maybe you want to send a message back to the user that they're already attending
       return null;
     }
 
@@ -176,7 +167,6 @@ export const action = async ({ request, params }) => {
   if (actionType === "unattend") {
     const user = await authenticator.isAuthenticated(request);
     if (!user) {
-      // Handle the case where the user is not authenticated
       return redirect("/signin");
     }
 
@@ -190,11 +180,9 @@ export const action = async ({ request, params }) => {
     });
 
     if (!event) {
-      // Handle the case where the event is not found
       return null;
     }
 
-    // Remove the user from attendees
     event.attendees = event.attendees.filter(
       (attendeeId) => attendeeId.toString() !== user._id.toString(),
     );

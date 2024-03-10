@@ -1,6 +1,5 @@
 import {
   Links,
-  Link,
   LiveReload,
   Meta,
   Outlet,
@@ -15,7 +14,6 @@ import Nav from "./components/Nav";
 import { useLoaderData } from "@remix-run/react";
 import { authenticator } from "./services/auth.server";
 
-
 export const links = () => [
   {
     rel: "stylesheet",
@@ -28,7 +26,7 @@ export const links = () => [
 ];
 
 export function meta() {
-  return [{ title: "Silvestre" }];
+  return [{ title: "VWeetUp" }];
 }
 
 export async function loader({ request }) {
@@ -61,14 +59,14 @@ export function ErrorBoundary() {
   console.error(error);
 
   return (
-    <html lang="da" className="h-full">
+    <html lang="en" className="h-full">
       <head>
-        <title>Åh nej!</title>
+        <title>Oh no!</title>
         <Meta />
         <Links />
       </head>
       <body className="flex h-full flex-col items-center justify-center">
-        <p className="text-3xl">Hov hov!</p>
+        <p className="text-3xl">Whoops!</p>
 
         {isRouteErrorResponse(error) ? (
           <p>

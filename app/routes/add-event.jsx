@@ -1,12 +1,11 @@
 import { redirect } from "@remix-run/node";
 import { Form, useNavigate } from "@remix-run/react";
 import mongoose from "mongoose";
-import { useState } from "react";
 import { authenticator } from "../services/auth.server";
 import { format } from "date-fns";
 
 export const meta = () => {
-  return [{ title: "Silvestre - Add New Event" }];
+  return [{ title: "VWeetup - Add New Event" }];
 };
 // ----------------------- Loader ----------------------- //
 export async function loader({ request }) {
@@ -16,7 +15,7 @@ export async function loader({ request }) {
 }
 
 // ----------------------- UI ----------------------- //
-export default function AddPost() {
+export default function AddEvent() {
   const navigate = useNavigate();
 
   function handleCancel() {
@@ -25,34 +24,34 @@ export default function AddPost() {
 
   return (
     <div className="page">
-      <h1>Add an event</h1>
+      <h1>Add Meetup</h1>
       <Form className="event-form" method="post">
-        <label htmlFor="overskrift">Overskrift</label>
+        <label htmlFor="title">Title</label>
         <input
-          id="overskrift"
+          id="title"
           name="titel"
           type="text"
-          aria-label="overskrift"
-          placeholder="Skriv en overskrift..."
+          aria-label="title"
+          placeholder="Write a title..."
         />
 
-        <label htmlFor="beskrivelse">Beskrivelse</label>
+        <label htmlFor="description">Description</label>
         <textarea
           id="description"
           name="description"
           rows="3"
-          placeholder="Skriv en beskrivelse..."
+          placeholder="Write a description..."
         ></textarea>
 
-        <label htmlFor="location">Lokation</label>
+        <label htmlFor="location">Location</label>
         <input
           id="location"
           name="place"
           type="text"
           aria-label="location"
-          placeholder="Skriv lokationen..."
+          placeholder="Write the location..."
         />
-        <label htmlFor="date">Dato</label>
+        <label htmlFor="date">Date</label>
         <input
           id="date"
           name="date"
