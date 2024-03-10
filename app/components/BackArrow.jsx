@@ -1,4 +1,4 @@
-import backArrow from "../assets/images/BackArrow.svg";
+import backArrow from "../images/BackArrow.svg";
 import { useNavigate } from "react-router-dom";
 
 function BackArrow() {
