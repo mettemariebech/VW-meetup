@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import { authenticator } from "../services/auth.server";
 import { format } from "date-fns";
 import { redirect } from "@remix-run/node";
+import BackArrow from "~/components/BackArrow";
 
 export function meta({ data }) {
   return [
@@ -49,7 +50,7 @@ export default function Event() {
 
     fetcher.submit(formData, {
       method: "post",
-      action: `/event/${event._id}`, 
+      action: `/event/${event._id}`,
     });
   }
 
@@ -61,6 +62,7 @@ export default function Event() {
 
   return (
     <div id="meetup-page" className="page">
+      <BackArrow />
       <h1>{event.titel}</h1>
       <p>
         Description:
@@ -81,9 +83,7 @@ export default function Event() {
       <div className="btns">
         {user && !isUserHost && !isAlreadyAttending && (
           <>
-            <Form
-              method="post"
-            >
+            <Form method="post">
               <button
                 type="submit"
                 name="_action"
@@ -141,7 +141,6 @@ export const action = async ({ request, params }) => {
   if (actionType === "attend") {
     const user = await authenticator.isAuthenticated(request);
     if (!user) {
-  
       return redirect("/signin");
     }
     const userId = user._id;
@@ -158,7 +157,6 @@ export const action = async ({ request, params }) => {
     }
 
     if (event.attendees.includes(user._id)) {
-
       return null;
     }
 
@@ -169,7 +167,6 @@ export const action = async ({ request, params }) => {
   if (actionType === "unattend") {
     const user = await authenticator.isAuthenticated(request);
     if (!user) {
-
       return redirect("/signin");
     }
 

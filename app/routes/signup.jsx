@@ -1,4 +1,3 @@
-import React from "react";
 import { Form } from "@remix-run/react";
 import { authenticator } from "../services/auth.server";
 import { sessionStorage } from "../services/session.server";
@@ -7,6 +6,7 @@ import { useLoaderData } from "@remix-run/react";
 import { redirect } from "@remix-run/node";
 import mongoose from "mongoose";
 import { Link } from "@remix-run/react";
+import BackArrow from "~/components/BackArrow";
 
 export async function loader({ request }) {
   await authenticator.isAuthenticated(request, {
@@ -25,6 +25,7 @@ export default function SignUp() {
   const loaderData = useLoaderData();
   return (
     <div id="sign-up-page" className="wrapper">
+      <BackArrow />
       <h1>Sign Up</h1>
       <Form id="sign-up-form" method="post">
         <label htmlFor="mail">Mail:</label>

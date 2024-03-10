@@ -2,6 +2,7 @@ import { Form } from "@remix-run/react";
 import { authenticator } from "~/services/auth.server";
 import { sessionStorage } from "../services/session.server";
 import { json, useLoaderData } from "@remix-run/react";
+import BackArrow from "~/components/BackArrow";
 
 // -------------------- Loader -------------------- //
 
@@ -15,7 +16,7 @@ export async function loader({ request }) {
   );
 
   const error = session.get("sessionErrorKey");
-  return json({ error }); 
+  return json({ error });
 }
 
 // -------------------- UI -------------------- //
@@ -26,6 +27,7 @@ export default function SignIn() {
 
   return (
     <div id="sign-in-page" className="wrapper">
+      <BackArrow />
       <h1>Sign In</h1>
       <Form id="sign-in-form" method="post">
         <label htmlFor="mail">Mail</label>
