@@ -33,16 +33,16 @@ export default function Events() {
           placeholder="Search"
           value={searchBar}
         />
-        <input
-          className="px-3 text-slate-700 mx-2 rounded-md"
-          type="datetime-local"
-          name="date"
-        />
-        <button name="_action" value="search" type="submit">
+
+        <button
+          name="_action"
+          value="search"
+          type="submit"
+          className="bg-black"
+        >
           Search
         </button>
       </Form>
-
       <h1>Events</h1>
       <ul className="events-list">
         {search.map((event) => (
@@ -72,7 +72,6 @@ export async function action({ request }) {
         { titel: { $regex: new RegExp(q), $options: "i" } },
         { description: { $regex: new RegExp(q), $options: "i" } },
         { place: { $regex: new RegExp(q), $options: "i" } },
-        { date: { $gte: date } },
       ],
     });
     return json(searchedEvents);
