@@ -1,6 +1,6 @@
 import { Link } from "@remix-run/react";
-import backgroundImage from "../images/yellow-bubble.jpg";
-import logo from "../images/VWMeetup-logo.svg";
+import backgroundImage from "../images/yellow-bubble-noise.jpg";
+import logo from "../images/VWMeetup-logo_stone.webp";
 
 export default function Index() {
   return (
@@ -18,7 +18,7 @@ export default function Index() {
       {/* --------------Overlay-------------- */}
       <div
         className="
-        absolute inset-0 bg-black opacity-10 
+        absolute inset-0 bg-stone-400 opacity-50 
         md:hidden"
       ></div>
 
@@ -27,27 +27,25 @@ export default function Index() {
         className="absolute inset-0 flex flex-col justify-center items-center text-center
         md:static md:col-span-1"
       >
-        <img src={logo} alt="Your Image" className="w-56 m-7" />
-
+        <img src={logo} alt="Your Image" className="w-64 m-7 font-urbane" />
         <div className="space-x-4">
           {/* Buttons */}
           <Link
             to="/signin"
-            className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+            className="text-white bg-stone-900 border border-stone-800 focus:outline-none hover:bg-stone-800 focus:ring-transparent font-medium rounded-lg text-sm px-8 py-2.5 mb-2"
           >
             Sign in
           </Link>
           <Link
             to="/signup"
-            className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+            className="text-white bg-stone-900 border border-stone-800 focus:outline-none hover:bg-stone-800 focus:ring-transparent  font-medium rounded-lg text-sm px-8 py-2.5 mb-2"
           >
             Sign up
           </Link>
         </div>
         <Link
           to="/events"
-          className="text-white mt-8 underline text-lg 
-          md:text-black"
+          className="text-stone-50 bg-stone-900 border border-stone-800 focus:outline-none hover:bg-stone-800 focus:ring-transparent font-medium rounded-lg text-sm px-12 py-2.5 mb-2 my-6"
         >
           Just browse meetups..
         </Link>
