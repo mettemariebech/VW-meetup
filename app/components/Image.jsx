@@ -1,4 +1,4 @@
-import backgroundImage from "../images/yellow-bubble-noise.jpg";
+import backgroundImage from "../images/yellow-bubble-noise.webp";
 
 export default function ImageMega() {
   return (

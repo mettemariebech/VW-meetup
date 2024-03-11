@@ -51,7 +51,7 @@ export default function SignIn() {
             aria-label="mail"
             placeholder="Type your mail..."
             required
-            className="placeholder-stone-700"
+            className="placeholder-stone-700 w-72 max-w-xs p-2 mt-1 border border-stone-800 rounded bg-transparent"
           />
 
           <label htmlFor="password" className="mt-3 text-left">
@@ -64,13 +64,13 @@ export default function SignIn() {
             aria-label="password"
             placeholder="Type your password..."
             autoComplete="current-password"
-            className="placeholder-stone-700"
+            className="placeholder-stone-700 w-72 max-w-xs p-2 mt-1 border border-stone-800 rounded bg-transparent"
           />
           <div className="error-message">
             {loaderData?.error ? <p>{loaderData?.error?.message}</p> : null}
           </div>
           <div>
-            <button className="text-white bg-stone-800 border border-stone-800 focus:outline-none hover:bg-stone-700 focus:ring-transparent  font-medium rounded-lg text-sm px-8 py-2.5 mb-2 w-full">
+            <button className="text-white bg-stone-800 border border-stone-800 focus:outline-none hover:bg-stone-700 focus:ring-transparent  font-medium rounded-lg text-sm px-8 py-2.5 mb-2 w-full mt-2">
               Sign In
             </button>
           </div>

@@ -33,9 +33,15 @@ export default function SignUp() {
         md:static md:col-span-1"
       >
         <BackArrow />
-        <h1>Sign Up</h1>
-        <Form id="sign-up-form" method="post">
-          <label htmlFor="mail">Mail:</label>
+        <h1 className="text-center text-4xl font-bold">Sign Up</h1>
+        <Form
+          id="sign-up-form"
+          method="post"
+          className="flex flex-col max-w-lg"
+        >
+          <label htmlFor="mail" className="mt-3 text-left">
+            Mail:
+          </label>
           <input
             id="mail"
             type="email"
@@ -43,9 +49,12 @@ export default function SignUp() {
             aria-label="mail"
             placeholder="Type your mail..."
             required
+            className="placeholder-stone-700 w-72 max-w-xs p-2 mt-1 border border-stone-800 rounded bg-transparent"
           />
 
-          <label htmlFor="name">Name:</label>
+          <label htmlFor="name" className="mt-3 text-left">
+            Name:
+          </label>
           <input
             id="name"
             type="text"
@@ -53,9 +62,12 @@ export default function SignUp() {
             aria-label="name"
             placeholder="Type your name..."
             required
+            className="placeholder-stone-700 w-72 max-w-xs p-2 mt-1 border border-stone-800 rounded bg-transparent"
           />
 
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="password" className="mt-3 text-left">
+            Password:
+          </label>
           <input
             id="password"
             type="password"
@@ -63,16 +75,19 @@ export default function SignUp() {
             aria-label="password"
             placeholder="Type your password..."
             autoComplete="current-password"
+            className="placeholder-stone-700 w-72 max-w-xs p-2 mt-1 border border-stone-800 rounded bg-transparent"
           />
           <div className="error-message">
             {loaderData?.error ? <p>{loaderData?.error?.message}</p> : null}
           </div>
           <div className="btns">
-            <button>Sign Up</button>
+            <button className="text-white bg-stone-800 border border-stone-800 focus:outline-none hover:bg-stone-700 focus:ring-transparent  font-medium rounded-lg text-sm px-8 py-2.5 mb-2 w-full mt-2">
+              Sign Up
+            </button>
           </div>
         </Form>
-        <p>
-          Already have an account?{" "}
+        <p className="mt-2">
+          Already have an account? <br />
           <Link to={"/signin"}>
             <b>Sign in here!</b>
           </Link>
