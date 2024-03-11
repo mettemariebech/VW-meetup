@@ -4,7 +4,7 @@ import { authenticator } from "../services/auth.server";
 
 export async function action({ params, request }) {
   await authenticator.isAuthenticated(request, {
-    failureRedirect: "/signin",
+    failureRedirect: "/",
   });
 
   await mongoose.models.Events.findByIdAndDelete(params.eventId);

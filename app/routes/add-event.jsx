@@ -10,7 +10,7 @@ export const meta = () => {
 // ----------------------- Loader ----------------------- //
 export async function loader({ request }) {
   return await authenticator.isAuthenticated(request, {
-    failureRedirect: "/signin",
+    failureRedirect: "/",
   });
 }
 

@@ -8,7 +8,7 @@ import { format } from "date-fns";
 export function meta() {
   return [
     {
-      title: "Silvestre - Update",
+      title: "VW Meetup - Update",
     },
   ];
 }
@@ -21,7 +21,6 @@ export async function loader({ params, request }) {
   const events = await mongoose.models.Events.findById(params.eventId);
   console.log(events, user);
   if (!events || events.userID.toString() !== user._id.toString()) {
-
     throw new Response("fail", { status: 404 });
   }
 

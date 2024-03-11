@@ -9,7 +9,7 @@ import BackArrow from "~/components/BackArrow";
 export function meta({ data }) {
   return [
     {
-      title: `VWeetup - ${data.event.titel || "Meetup"}`,
+      title: `VW Meetup - ${data.event.titel || "Meetups"}`,
     },
   ];
 }
