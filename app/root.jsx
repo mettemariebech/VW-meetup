@@ -36,7 +36,7 @@ export async function loader({ request }) {
 export default function App() {
   const user = useLoaderData();
   return (
-    <html lang="en">
+    <html lang="en" className="h-full m-0 p-0">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -47,7 +47,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-stone-200 font-roboto">
+      <body className="h-full m-0 p-0 bg-stone-200 font-roboto text-stone-800">
         {user ? <Nav /> : null}
         <Outlet />
         <ScrollRestoration />

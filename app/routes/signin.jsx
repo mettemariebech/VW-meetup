@@ -26,11 +26,16 @@ export default function SignIn() {
   console.log("loaderData", loaderData);
 
   return (
-    <div id="sign-in-page" className="wrapper">
+    <div
+      id="sign-in-page"
+      className="flex flex-col justify-center items-center h-full"
+    >
       <BackArrow />
-      <h1>Sign In</h1>
-      <Form id="sign-in-form" method="post">
-        <label htmlFor="mail">Mail</label>
+      <h1 className="text-center text-4xl font-bold">Sign In</h1>
+      <Form id="sign-in-form" method="post" className="flex flex-col max-w-lg">
+        <label htmlFor="mail" className="mt-3">
+          Mail
+        </label>
         <input
           id="mail"
           type="email"
@@ -40,7 +45,9 @@ export default function SignIn() {
           required
         />
 
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password" className="mt-3">
+          Password
+        </label>
         <input
           id="password"
           type="password"
@@ -52,8 +59,10 @@ export default function SignIn() {
         <div className="error-message">
           {loaderData?.error ? <p>{loaderData?.error?.message}</p> : null}
         </div>
-        <div className="btns">
-          <button>Sign In</button>
+        <div>
+          <button className="text-white bg-stone-800 border border-stone-800 focus:outline-none hover:bg-stone-700 focus:ring-transparent  font-medium rounded-lg text-sm px-8 py-2.5 mb-2 w-full">
+            Sign In
+          </button>
         </div>
       </Form>
     </div>

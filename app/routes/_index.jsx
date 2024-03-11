@@ -32,20 +32,20 @@ export default function Index() {
           {/* Buttons */}
           <Link
             to="/signin"
-            className="text-white bg-stone-900 border border-stone-800 focus:outline-none hover:bg-stone-800 focus:ring-transparent font-medium rounded-lg text-sm px-8 py-2.5 mb-2"
+            className="text-white bg-stone-800 border border-stone-800 focus:outline-none hover:bg-stone-700 focus:ring-transparent font-medium rounded-lg text-sm px-8 py-2.5 mb-2"
           >
             Sign in
           </Link>
           <Link
             to="/signup"
-            className="text-white bg-stone-900 border border-stone-800 focus:outline-none hover:bg-stone-800 focus:ring-transparent  font-medium rounded-lg text-sm px-8 py-2.5 mb-2"
+            className="text-white bg-stone-800 border border-stone-800 focus:outline-none hover:bg-stone-700 focus:ring-transparent  font-medium rounded-lg text-sm px-8 py-2.5 mb-2"
           >
             Sign up
           </Link>
         </div>
         <Link
           to="/events"
-          className="text-stone-50 bg-stone-900 border border-stone-800 focus:outline-none hover:bg-stone-800 focus:ring-transparent font-medium rounded-lg text-sm px-12 py-2.5 mb-2 my-6"
+          className="text-stone-50 bg-stone-800 border border-stone-800 focus:outline-none hover:bg-stone-700 focus:ring-transparent font-medium rounded-lg text-sm px-12 py-2.5 mb-2 my-6"
         >
           Just browse meetups..
         </Link>
