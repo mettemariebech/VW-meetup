@@ -91,7 +91,7 @@ button:hover {
 }
 
 /* ---------- Navigation Styling ---------- */
-nav {
+/* nav {
   background-color: black;
   display: grid;
   left: 0;
@@ -101,9 +101,9 @@ nav {
   padding: 1em 2em;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1em;
-}
+} */
 
-/* Style the links inside the navigation bar */
+/* Style the links inside the navigation bar
 nav a {
   display: inline-block;
   color: var(--text-color-light);
@@ -119,16 +119,16 @@ nav a {
 }
 
 /* Change the color of links on hover */
-nav a:hover {
+/* nav a:hover {
   background-color: white;
   color: var(--green);
 }
 
 /* Add a color to the active/current link */
-nav a.active {
+/* nav a.active {
   background-color: pink;
   color: var(--green);
-}
+} */
 
 /* ================== Form ================== */
 
