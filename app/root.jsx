@@ -13,6 +13,7 @@ import maincss from "./main.css";
 import Nav from "./components/Nav";
 import { useLoaderData } from "@remix-run/react";
 import { authenticator } from "./services/auth.server";
+import favicon from "app/images/VWMeetup-fv.png";
 
 export const links = () => [
   {
@@ -40,6 +41,7 @@ export default function App() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/x-icon" href={favicon}></link>
         <link
           rel="stylesheet"
           href="https://use.typekit.net/feo1kzq.css"
