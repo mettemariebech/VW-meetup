@@ -2,7 +2,12 @@
 export default {
   content: ["./app/**/*.{ts,tsx,jsx,js}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'urban': ["urbane-rounded", "sans-serif"],
+        'roboto': ["roboto", "sans-serif"],
+      },
+    },
   },
   plugins: [],
   darkMode: "media",

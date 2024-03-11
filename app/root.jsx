@@ -40,10 +40,14 @@ export default function App() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+          rel="stylesheet"
+          href="https://use.typekit.net/feo1kzq.css"
+        ></link>
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="bg-stone-200 font-roboto">
         {user ? <Nav /> : null}
         <Outlet />
         <ScrollRestoration />
