@@ -13,6 +13,7 @@ import maincss from "./main.css";
 import Nav from "./components/Nav";
 import { useLoaderData } from "@remix-run/react";
 import { authenticator } from "./services/auth.server";
+import favicon from "app/images/VWMeetup-fv.png";
 
 export const links = () => [
   {
@@ -36,14 +37,19 @@ export async function loader({ request }) {
 export default function App() {
   const user = useLoaderData();
   return (
-    <html lang="en">
+    <html lang="en" className="h-full m-0 p-0">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/x-icon" href={favicon}></link>
+        <link
+          rel="stylesheet"
+          href="https://use.typekit.net/feo1kzq.css"
+        ></link>
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="h-full m-0 p-0 bg-stone-200 font-roboto text-stone-800">
         {user ? <Nav /> : null}
         <Outlet />
         <ScrollRestoration />

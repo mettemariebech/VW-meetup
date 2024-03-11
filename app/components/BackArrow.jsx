@@ -10,7 +10,7 @@ function BackArrow() {
 
   return (
     <div
-      className="flex flex-col justify-center items-center fixed top-0 left-0 w-12 h-10 z-50"
+      className="flex flex-col justify-center items-center fixed top-3 left-5 w-7 h-10 z-50"
       onClick={goBack}
     >
       <img src={backArrow} alt="Back Arrow" />
