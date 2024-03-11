@@ -7,6 +7,7 @@ import { redirect } from "@remix-run/node";
 import mongoose from "mongoose";
 import { Link } from "@remix-run/react";
 import BackArrow from "~/components/BackArrow";
+import ImageMega from "~/components/Image";
 
 export async function loader({ request }) {
   await authenticator.isAuthenticated(request, {
@@ -24,52 +25,59 @@ export async function loader({ request }) {
 export default function SignUp() {
   const loaderData = useLoaderData();
   return (
-    <div id="sign-up-page" className="wrapper">
-      <BackArrow />
-      <h1>Sign Up</h1>
-      <Form id="sign-up-form" method="post">
-        <label htmlFor="mail">Mail:</label>
-        <input
-          id="mail"
-          type="email"
-          name="email"
-          aria-label="mail"
-          placeholder="Type your mail..."
-          required
-        />
+    <div className="relative h-screen md:grid md:grid-cols-2">
+      <ImageMega />
+      <div
+        id="sign-in-page"
+        className="absolute inset-0 flex flex-col justify-center items-center text-center
+        md:static md:col-span-1"
+      >
+        <BackArrow />
+        <h1>Sign Up</h1>
+        <Form id="sign-up-form" method="post">
+          <label htmlFor="mail">Mail:</label>
+          <input
+            id="mail"
+            type="email"
+            name="email"
+            aria-label="mail"
+            placeholder="Type your mail..."
+            required
+          />
 
-        <label htmlFor="name">Name:</label>
-        <input
-          id="name"
-          type="text"
-          name="username"
-          aria-label="name"
-          placeholder="Type your name..."
-          required
-        />
+          <label htmlFor="name">Name:</label>
+          <input
+            id="name"
+            type="text"
+            name="username"
+            aria-label="name"
+            placeholder="Type your name..."
+            required
+          />
 
-        <label htmlFor="password">Password:</label>
-        <input
-          id="password"
-          type="password"
-          name="password"
-          aria-label="password"
-          placeholder="Type your password..."
-          autoComplete="current-password"
-        />
-        <div className="error-message">
-          {loaderData?.error ? <p>{loaderData?.error?.message}</p> : null}
-        </div>
-        <div className="btns">
-          <button>Sign Up</button>
-        </div>
-      </Form>
-      <p>
-        Already have an account?{" "}
-        <Link to={"/signin"}>
-          <b>Sign in here!</b>
-        </Link>
-      </p>
+          <label htmlFor="password">Password:</label>
+          <input
+            id="password"
+            type="password"
+            name="password"
+            aria-label="password"
+            placeholder="Type your password..."
+            autoComplete="current-password"
+          />
+          <div className="error-message">
+            {loaderData?.error ? <p>{loaderData?.error?.message}</p> : null}
+          </div>
+          <div className="btns">
+            <button>Sign Up</button>
+          </div>
+        </Form>
+        <p>
+          Already have an account?{" "}
+          <Link to={"/signin"}>
+            <b>Sign in here!</b>
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }
