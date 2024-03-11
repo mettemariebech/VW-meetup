@@ -28,16 +28,16 @@
   padding: 0;
 }
 
-.event-item {
+/* .event-item {
   border: 1px solid #000000;
   margin-bottom: 10px;
   padding: 10px;
-}
+} */
 
-.event-title {
+/* .event-title {
   font-size: 1.2rem;
   margin-bottom: 5px;
-}
+} */
 
 .event-description {
   color: #666;
@@ -45,9 +45,6 @@
   margin-bottom: 10px;
 }
 
-h2 {
-  font-size: 1.5rem;
-}
 
 /* ================== Search ================== */
 

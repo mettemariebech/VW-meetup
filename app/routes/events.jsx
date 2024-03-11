@@ -25,45 +25,50 @@ export default function Events() {
   }, [searchedEvents, events]);
 
   return (
-    <div className="events-container">
-      <Form id="search-form" method="post" onSubmit={handleSubmit}>
-        <input
-          type="search"
-          name="search"
-          placeholder="Search"
-          value={searchBar}
-        />
+    <div className="flex justify-center">
+      <div className="max-w-xl">
+        <div className="flex flex-col justify-center items-center mt-24">
+          <h1 className="text-center text-4xl font-bold mb-5">Meetups</h1>
+          <Form id="search-form" method="post" onSubmit={handleSubmit}>
+            <input
+              type="search"
+              name="search"
+              placeholder="Search"
+              value={searchBar}
+              className="placeholder-stone-700 w-72 max-w-xs p-2 mt-1 border border-stone-800 rounded bg-transparent"
+            />
 
-        <button
-          name="_action"
-          value="search"
-          type="submit"
-          className="bg-black"
-        >
-          Search
-        </button>
-      </Form>
-      <h1>Meetups</h1>
-      <NavLink
-        to="/add-event"
-        className="inline-block text-center px-4 py-6 no-underline uppercase font-semibold text-lg tracking-wide rounded-lg transition duration-500 ease-in-out"
-      >
-        Add Event
-      </NavLink>
-      <ul className="events-list">
-        {search.map((event) => (
-          <li key={event._id} className="event-item">
-            <Link
-              key={event._id}
-              className="event-link"
-              to={`/event/${event._id}`}
+            <button
+              name="_action"
+              value="search"
+              type="submit"
+              className="text-white bg-stone-800 border border-stone-800 focus:outline-none hover:bg-stone-700 focus:ring-transparent  font-medium rounded-lg text-sm px-8 py-2.5 mb-2 mt-2 ml-3"
             >
-              <h2 className="event-title">{event.titel}</h2>
-              <p className="event-description">{event.description}</p>
-            </Link>
-          </li>
-        ))}
-      </ul>
+              Search
+            </button>
+          </Form>
+          <NavLink
+            to="/add-event"
+            className="text-white bg-stone-800 border border-stone-800 focus:outline-none hover:bg-stone-700 focus:ring-transparent font-medium rounded-lg text-sm px-8  py-2.5 mb-4 mt-9 mr-auto"
+          >
+            Add Event
+          </NavLink>
+          <ul className="events-list">
+            {search.map((event) => (
+              <li key={event._id} className="border border-black mb-5 p-5">
+                <Link
+                  key={event._id}
+                  className="event-link"
+                  to={`/event/${event._id}`}
+                >
+                  <h2 className="font-bold">{event.titel}</h2>
+                  <p className="event-description">{event.description}</p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }
