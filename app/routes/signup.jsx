@@ -6,7 +6,6 @@ import { useLoaderData } from "@remix-run/react";
 import { redirect } from "@remix-run/node";
 import mongoose from "mongoose";
 import { Link } from "@remix-run/react";
-import BackArrow from "~/components/BackArrow";
 import ImageMega from "~/components/Image";
 
 export async function loader({ request }) {
@@ -32,7 +31,6 @@ export default function SignUp() {
         className="absolute inset-0 flex flex-col justify-center items-center text-center
         md:static md:col-span-1"
       >
-        <BackArrow />
         <h1 className="text-center text-4xl font-bold">Sign Up</h1>
         <Form
           id="sign-up-form"
@@ -77,7 +75,7 @@ export default function SignUp() {
             autoComplete="current-password"
             className="placeholder-stone-700 w-72 max-w-xs p-2 mt-1 border border-stone-800 rounded bg-transparent"
           />
-          <div className="error-message">
+          <div className="mt-5 text-center text-red-900">
             {loaderData?.error ? <p>{loaderData?.error?.message}</p> : null}
           </div>
           <div className="btns">

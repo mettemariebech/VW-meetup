@@ -4,7 +4,6 @@ import mongoose from "mongoose";
 import { authenticator } from "../services/auth.server";
 import { format } from "date-fns";
 import { redirect } from "@remix-run/node";
-import BackArrow from "~/components/BackArrow";
 import profile from "../images/profile.jpg";
 
 export function meta({ data }) {
@@ -65,7 +64,6 @@ export default function Event() {
     <div className="flex justify-center items-center h-screen max-w-xl mx-auto px-5">
       <div>
         <div id="meetup-page" className="page">
-          <BackArrow />
           <h1 className="text-2xl font-bold font-roboto mb-5 text-center">
             {event.titel}
           </h1>

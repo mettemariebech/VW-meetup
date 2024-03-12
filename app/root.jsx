@@ -9,7 +9,6 @@ import {
   useRouteError,
 } from "@remix-run/react";
 import styles from "./tailwind.css";
-import maincss from "./main.css";
 import Nav from "./components/Nav";
 import { useLoaderData } from "@remix-run/react";
 import { authenticator } from "./services/auth.server";
@@ -19,10 +18,6 @@ export const links = () => [
   {
     rel: "stylesheet",
     href: styles,
-  },
-  {
-    rel: "stylesheet",
-    href: maincss,
   },
 ];
 
@@ -50,7 +45,8 @@ export default function App() {
         <Links />
       </head>
       <body className="h-full m-0 p-0 bg-stone-200 font-roboto text-stone-800">
-        {user ? <Nav /> : null}
+        {/* {user ? <Nav /> : null} */}
+        <Nav />
         <Outlet />
         <ScrollRestoration />
         <Scripts />
