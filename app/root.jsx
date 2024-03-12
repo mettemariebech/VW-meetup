@@ -27,7 +27,7 @@ export const links = () => [
 ];
 
 export function meta() {
-  return [{ title: "VWeetUp" }];
+  return [{ title: "VW MeetUp" }];
 }
 
 export async function loader({ request }) {
