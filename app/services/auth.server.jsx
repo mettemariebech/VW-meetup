@@ -46,12 +46,12 @@ async function verifyUser({ email, password }) {
     "+password",
   );
   if (!user) {
-    throw new AuthorizationError("No user found with this email.");
+    throw new AuthorizationError("Mail or password is incorrect");
   }
 
   const passwordMatch = await bcrypt.compare(password, user.password);
   if (!passwordMatch) {
-    throw new AuthorizationError("Invalid password.");
+    throw new AuthorizationError("Mail or password is incorrect");
   }
 
   // Set password to undefined to ensure it is not returned as part of the user object

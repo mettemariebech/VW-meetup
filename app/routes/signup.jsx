@@ -75,7 +75,7 @@ export default function SignUp() {
             autoComplete="current-password"
             className="placeholder-stone-700 w-72 max-w-xs p-2 mt-1 border border-stone-800 rounded bg-transparent"
           />
-          <div className="error-message">
+          <div className="mt-5 text-center text-red-900">
             {loaderData?.error ? <p>{loaderData?.error?.message}</p> : null}
           </div>
           <div className="btns">
