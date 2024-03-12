@@ -51,7 +51,7 @@ export default function UpdateEvent() {
               type="text"
               aria-label="title"
               defaultValue={event?.titel}
-              className="placeholder-stone-700 w-72 max-w-xs p-2 mt-1 border border-stone-800 rounded bg-transparent"
+              className="placeholder-stone-700 w-80 md:w-96 max-w-lg p-2 mt-1 border border-stone-800 rounded bg-transparent"
             />
 
             <label htmlFor="description" className="mt-3">
@@ -62,7 +62,7 @@ export default function UpdateEvent() {
               name="description"
               rows="3"
               defaultValue={event?.description}
-              className="placeholder-stone-700 w-72 max-w-xs p-2 mt-1 border border-stone-800 rounded bg-transparent"
+              className="placeholder-stone-700 w-80 md:w-96 max-w-lg p-2 mt-1 border border-stone-800 rounded bg-transparent"
             ></textarea>
 
             <label htmlFor="location" className="mt-3">
@@ -74,7 +74,7 @@ export default function UpdateEvent() {
               type="text"
               aria-label="location"
               defaultValue={event?.place}
-              className="placeholder-stone-700 w-72 max-w-xs p-2 mt-1 border border-stone-800 rounded bg-transparent"
+              className="placeholder-stone-700 w-80 md:w-96 max-w-lg p-2 mt-1 border border-stone-800 rounded bg-transparent"
             />
             <label htmlFor="date" className="mt-3">
               Date
@@ -89,7 +89,7 @@ export default function UpdateEvent() {
                   ? format(new Date(event.date), "yyyy-MM-dd'T'HH:mm")
                   : format(new Date(), "yyyy-MM-dd'T'HH:mm")
               }
-              className="placeholder-stone-700 w-72 max-w-xs p-2 mt-1 border border-stone-800 rounded bg-transparent"
+              className="placeholder-stone-700 w-80 md:w-96 max-w-lg p-2 mt-1 border border-stone-800 rounded bg-transparent"
             />
 
             <div className="flex gap-4 justify-center mt-5">
