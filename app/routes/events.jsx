@@ -25,7 +25,7 @@ export default function Events() {
   }, [searchedEvents, events]);
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center px-7 lg:px-0">
       <div className="max-w-xl">
         <div className="flex flex-col justify-center items-center mt-24">
           <h1 className="text-center text-4xl font-bold mb-5">Meetups</h1>
@@ -35,7 +35,7 @@ export default function Events() {
               name="search"
               placeholder="Search"
               value={searchBar}
-              className="placeholder-stone-700 w-72 max-w-xs p-2 mt-1 border border-stone-800 rounded bg-transparent"
+              className="placeholder-stone-700 p-2 mt-1 border border-stone-800 rounded bg-transparent max-w-lg"
             />
 
             <button
