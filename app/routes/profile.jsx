@@ -33,7 +33,7 @@ export default function Profile() {
     // ------------Personal------------
     <div className="flex justify-center items-center h-screen">
       <div>
-        <div className="flex place-items-center gap-3 text-2xl font-bold font-roboto mb-5">
+        <div className="flex place-items-center gap-3 text-2xl font-bold font-roboto mb-5 ">
           <img src={profile} alt="Logo" className="rounded-full  w-12" />
           <h1>{username.username}</h1>
         </div>
