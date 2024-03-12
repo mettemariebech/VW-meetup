@@ -20,10 +20,6 @@ export const links = () => [
     rel: "stylesheet",
     href: styles,
   },
-  {
-    rel: "stylesheet",
-    href: maincss,
-  },
 ];
 
 export function meta() {
