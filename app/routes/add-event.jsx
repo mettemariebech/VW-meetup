@@ -105,6 +105,7 @@ export async function action({ request }) {
   console.log(user);
 
   event.userID = user._id;
+  event.attendees = [user._id];
 
   await mongoose.models.Events.create(event);
 
