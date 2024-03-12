@@ -50,7 +50,8 @@ export default function App() {
         <Links />
       </head>
       <body className="h-full m-0 p-0 bg-stone-200 font-roboto text-stone-800">
-        {user ? <Nav /> : null}
+        {/* {user ? <Nav /> : null} */}
+        <Nav />
         <Outlet />
         <ScrollRestoration />
         <Scripts />
