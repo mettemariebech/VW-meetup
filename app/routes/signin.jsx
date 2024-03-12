@@ -2,7 +2,6 @@ import { Form } from "@remix-run/react";
 import { authenticator } from "~/services/auth.server";
 import { sessionStorage } from "../services/session.server";
 import { json, useLoaderData } from "@remix-run/react";
-import BackArrow from "~/components/BackArrow";
 import ImageMega from "~/components/Image";
 
 // -------------------- Loader -------------------- //
@@ -34,7 +33,6 @@ export default function SignIn() {
         className="absolute inset-0 flex flex-col justify-center items-center text-center
         md:static md:col-span-1"
       >
-        <BackArrow />
         <h1 className="text-center text-4xl font-bold">Sign In</h1>
         <Form
           id="sign-in-form"
