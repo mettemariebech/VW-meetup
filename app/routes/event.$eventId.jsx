@@ -5,6 +5,7 @@ import { authenticator } from "../services/auth.server";
 import { format } from "date-fns";
 import { redirect } from "@remix-run/node";
 import BackArrow from "~/components/BackArrow";
+import profile from "../images/profile.jpg";
 
 export function meta({ data }) {
   return [
@@ -61,70 +62,90 @@ export default function Event() {
     user && event.attendees.some((attendee) => attendee._id === user._id);
 
   return (
-    <div id="meetup-page" className="page">
-      <BackArrow />
-      <h1>{event.titel}</h1>
-      <p>
-        Description:
-        {event.description}
-      </p>
-      <div>Location: {event.place}</div>
-      <div>Time: {format(new Date(event.date), "dd/MM/yyyy HH:mm")}</div>
-
+    <div className="flex justify-center items-center h-screen max-w-xl mx-auto px-5">
       <div>
-        Attendees:
-        <ul>
-          {event.attendees.map((attendee, index) => (
-            <li key={index}>{attendee.username}</li>
-          ))}
-        </ul>
-      </div>
-      {/* -------------------tilmeld-----------------------*/}
-      <div className="btns">
-        {user && !isUserHost && !isAlreadyAttending && (
-          <>
-            <Form method="post">
-              <button
-                type="submit"
-                name="_action"
-                value="attend"
-                className="bg-black float-left"
-              >
-                Attend
-              </button>
-            </Form>
-          </>
-        )}
-      </div>
-      {/* -------------------Frameld-----------------------*/}
-      <div className="btns">
-        {!isUserHost && isAlreadyAttending && (
-          <>
-            <Form method="post">
-              <button
-                type="submit"
-                name="_action"
-                value="unattend"
-                className="bg-black float-left"
-              >
-                Unattend
-              </button>
-            </Form>
-          </>
-        )}
-      </div>
-      {/* -------------------Update & delete-----------------------*/}
-      <div className="btns">
-        {user && event?.userID == user?._id && (
-          <>
-            <Form action="update">
-              <button>Update</button>
-            </Form>
-            <Form action="destroy" method="post" onSubmit={confirmDelete}>
-              <button>Delete</button>
-            </Form>
-          </>
-        )}
+        <div id="meetup-page" className="page">
+          <BackArrow />
+          <h1 className="text-2xl font-bold font-roboto mb-5 text-center">
+            {event.titel}
+          </h1>
+          <p className="text-justify mb-5">{event.description}</p>
+          <div className="flex justify-evenly">
+            <div className="flex flex-col">
+              <p className="text-center font-bold">Location</p>
+              <p className="text-center"> {event.place}</p>
+            </div>
+            <div className="flex flex-col">
+              <p className="text-center font-bold">Time</p>
+              <div className="text-center">
+                {format(new Date(event.date), "dd/MM/yyyy HH:mm")}
+              </div>
+            </div>
+          </div>
+          {/* -------------------Attendees-----------------------*/}
+          <div className="flex flex-col items-center">
+            <p className=" font-bold mt-7 mb-5 text-xl">Attendees</p>
+            <ul className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {event.attendees.map((attendee, index) => (
+                <li key={index} className="flex items-center gap-1">
+                  <img src={profile} alt="Logo" className="rounded-full w-7" />
+                  <h1 className="font-roboto text-sm">{attendee.username}</h1>
+                </li>
+              ))}
+            </ul>
+          </div>
+          {/* -------------------tilmeld-----------------------*/}
+          <div class="flex justify-center mt-5">
+            {user && !isUserHost && !isAlreadyAttending && (
+              <>
+                <Form method="post">
+                  <button
+                    type="submit"
+                    name="_action"
+                    value="attend"
+                    className="text-white bg-stone-800 border border-stone-800 focus:outline-none hover:bg-stone-700 focus:ring-transparent font-medium rounded-lg text-sm px-8 py-2.5 mb-2 w-32 text-center"
+                  >
+                    Attend
+                  </button>
+                </Form>
+              </>
+            )}
+          </div>
+          {/* -------------------Frameld-----------------------*/}
+          <div class="flex justify-center mt-5">
+            {!isUserHost && isAlreadyAttending && (
+              <>
+                <Form method="post">
+                  <button
+                    type="submit"
+                    name="_action"
+                    value="unattend"
+                    className="text-white bg-stone-800 border border-stone-800 focus:outline-none hover:bg-stone-700 focus:ring-transparent font-medium rounded-lg text-sm px-8 py-2.5 mb-2 w-32 text-center"
+                  >
+                    Unattend
+                  </button>
+                </Form>
+              </>
+            )}
+          </div>
+          {/* -------------------Update & delete-----------------------*/}
+          <div className="btns">
+            {user && event?.userID == user?._id && (
+              <div className="flex gap-4 justify-center mt-5">
+                <Form action="update">
+                  <button className="text-white bg-stone-800 border border-stone-800 focus:outline-none hover:bg-stone-700 focus:ring-transparent font-medium rounded-lg text-sm px-8 py-2.5 mb-2 w-32 text-center">
+                    Update
+                  </button>
+                </Form>
+                <Form action="destroy" method="post" onSubmit={confirmDelete}>
+                  <button className="text-white bg-stone-800 border border-stone-800 focus:outline-none hover:bg-stone-700 focus:ring-transparent font-medium rounded-lg text-sm px-8 py-2.5 mb-2 w-32 text-center">
+                    Delete
+                  </button>
+                </Form>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -160,7 +181,7 @@ export const action = async ({ request, params }) => {
       return null;
     }
 
-    return redirect(`/profile`);
+    return null;
   }
 
   /* ------------fjern attend--------------*/
@@ -188,6 +209,6 @@ export const action = async ({ request, params }) => {
     );
     await event.save();
 
-    return redirect(`/profile`);
+    return null;
   }
 };
