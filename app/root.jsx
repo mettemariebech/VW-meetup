@@ -9,7 +9,6 @@ import {
   useRouteError,
 } from "@remix-run/react";
 import styles from "./tailwind.css";
-import maincss from "./main.css";
 import Nav from "./components/Nav";
 import { useLoaderData } from "@remix-run/react";
 import { authenticator } from "./services/auth.server";
